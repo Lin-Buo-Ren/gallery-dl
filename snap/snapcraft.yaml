@@ -100,6 +100,12 @@ parts:
     - libswresample2
     - libswscale4
 
+  manpage-viewer:
+    plugin: nil
+    stage-packages:
+    - dialog
+    - man-db
+
 apps:
   gallery-dl:
     adapter: full
@@ -113,3 +119,25 @@ apps:
 
       # Satisfy FFmpeg's libpulsecommon dependency
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+
+  read-manual:
+    adapter: full
+    command: bin/manual-selector-launch
+    command-chain:
+    - bin/gallery-dl-launch
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+
+      # Fix-up non-multiarch compliant libmandb library lookup
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/man-db
+
+      # Fix-up manual page search path
+      MANPATH: $SNAP/share/man
+
+layout:
+  # Fix-up man command
+  /etc/manpath.config:
+    bind-file: $SNAP/etc/manpath.config
+  /usr/lib/man-db:
+    symlink: $SNAP/usr/lib/man-db
