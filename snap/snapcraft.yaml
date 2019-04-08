@@ -86,19 +86,46 @@ parts:
 
   ffmpeg:
     plugin: nil
+    stage-snaps:
+    - ffmpeg-core18-lgpl
     stage-packages:
-    - ffmpeg
-    - libavcodec57
-    - libavdevice57
-    - libavfilter6
-    - libavformat57
-    - libavresample3
-    - libavutil55
-    - libpostproc54
-    - libpulse0
+    ### Dynamic-linking safe dependencies
+    - libasound2
+    - libass9
+    - libbluray2
+    - libbs2b0
+    - libcaca0
+    - libdrm2
+    - libfontconfig1
+    - libfribidi0
+    - libgmp10
+    - libgraphite2-3
+    - libharfbuzz0b
+    - libmp3lame0
+    - try:
+      - libnuma1
+    - libogg0
+    - libopencore-amrnb0
+    - libopencore-amrwb0
+    - libopus0
     - libslang2
-    - libswresample2
-    - libswscale4
+    - libtheora0
+    - libva-drm2
+    - libva-x11-2
+    - libva2
+    - libvdpau1
+    - libvo-amrwbenc0
+    - libvorbis0a
+    - libvorbisenc2
+    - libvpx5
+    - libx11-6
+    - libxau6
+    - libxcb-shape0
+    - libxcb-shm0
+    - libxcb-xfixes0
+    - libxdmcp6
+    - libxext6
+    - libxfixes3
 
 apps:
   gallery-dl:
